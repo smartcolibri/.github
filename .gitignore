@@ -1,0 +1,10 @@
+# Local session docs (never published)
+COMMANDS.md
+CHANGES.md
+MEMORY.md
+TODOS.md
+PLAN.md
+.omc/
+.DS_Store
+__pycache__/
+.venv/

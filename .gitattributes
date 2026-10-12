@@ -1,0 +1,2 @@
+# Keep the asset generator out of the org language stats
+*.py linguist-detectable=false

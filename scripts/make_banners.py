@@ -28,9 +28,9 @@ COLIBRI = """
 # Tokens from www.smartcolibri.fr (navy, white, mist; brass is reserved for the EU AI Act frame).
 NAVY, NAVY_DEEP, WHITE = "#0f2340", "#0a1830", "#ffffff"
 THEMES = {
-    "light": dict(bg=WHITE, panel="#f4f6f9", text="#16223a", muted="#5a6374", label="#5a6374",
+    "light": dict(bg=WHITE, panel="#f4f6f9", text="#16223a", muted="#5a6374",
                   rule="#69717f", border="#dde2ea", mark=NAVY, eye=WHITE),
-    "dark": dict(bg=NAVY_DEEP, panel=NAVY, text=WHITE, muted="#b6bcc7", label="#b6bcc7",
+    "dark": dict(bg=NAVY_DEEP, panel=NAVY, text=WHITE, muted="#b6bcc7",
                  rule="#8a93a2", border="#2a3a55", mark=WHITE, eye=NAVY),
 }
 
@@ -59,14 +59,15 @@ def outline(font, text, size, x, y, tracking=0.0):
 def banner(theme, fonts):
     t = THEMES[theme]
     W, H, X, P = 1280, 400, 88, 880
-    serif, italic, sans, label = fonts
+    serif, italic, sans, wordmark_font = fonts
 
-    eyebrow, _ = outline(label, "SMART COLIBRI · ÉDITION LOGICIELLE", 13, X, 132, tracking=.14)
-    l1, _ = outline(serif, "Des apps natives,", 62, X - 2, 210, tracking=-.012)
-    em, ex = outline(italic, "précises", 62, X - 2, 280, tracking=-.012)
-    l2, _ = outline(serif, " comme un colibri", 62, ex, 280, tracking=-.012)
-    lead1, _ = outline(sans, "Applications natives pour l'écosystème Apple, par un cabinet de", 18, X, 330)
-    lead2, _ = outline(sans, "conseil indépendant en intelligence artificielle et stratégie.", 18, X, 357)
+    # DESIGN.md: no text above a headline, no uppercase runs; the wordmark sits apart, the short rule opens.
+    wordmark, _ = outline(wordmark_font, "Smart Colibri", 22, X, 78)
+    l1, _ = outline(serif, "Des apps natives,", 62, X - 2, 200, tracking=-.012)
+    em, ex = outline(italic, "précises", 62, X - 2, 270, tracking=-.012)
+    l2, _ = outline(serif, " comme un colibri", 62, ex, 270, tracking=-.012)
+    lead1, _ = outline(sans, "Applications natives pour l'écosystème Apple, par un cabinet de", 18, X, 322)
+    lead2, _ = outline(sans, "conseil indépendant en intelligence artificielle et stratégie.", 18, X, 349)
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="t">
 <title id="t">Smart Colibri — Des apps natives, précises comme un colibri</title>
@@ -80,8 +81,8 @@ def banner(theme, fonts):
 <g transform="translate(1080 200) scale(2.7) translate(-55 -61)" fill="{t["mark"]}">{COLIBRI}
   <circle cx="42" cy="45" r="1.5" fill="{t["panel"]}"/>
 </g>
-<rect x="{X}" y="88" width="40" height="1" fill="{t["rule"]}"/>
-<path d="{eyebrow}" fill="{t["label"]}"/>
+<path d="{wordmark}" fill="{t["text"]}"/>
+<rect x="{X}" y="118" width="40" height="1" fill="{t["rule"]}"/>
 <path d="{l1}" fill="{t["text"]}"/>
 <path d="{em}" fill="{t["text"]}"/>
 <path d="{l2}" fill="{t["text"]}"/>
@@ -106,7 +107,7 @@ def main():
         load("sourceserif-normal.woff2", wght=400, opsz=60),
         load("sourceserif-italic.woff2", wght=400),
         load("inter.woff2", wght=400),
-        load("inter.woff2", wght=500),
+        load("sourceserif-normal.woff2", wght=500, opsz=20),
     )
     OUT.mkdir(parents=True, exist_ok=True)
     for theme in THEMES:

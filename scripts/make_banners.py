@@ -3,10 +3,12 @@
 Text is converted to outlines so the SVGs render identically through GitHub's image proxy,
 which loads no web fonts. Fonts are the ones served by www.smartcolibri.fr:
 
-    python3 scripts/make_banners.py <fonts_dir>
+    python3 scripts/make_banners.py <fonts_dir> <icons_dir>
 
-where <fonts_dir> holds sourceserif-normal.woff2, sourceserif-italic.woff2 and inter.woff2.
+where <fonts_dir> holds sourceserif-normal.woff2, sourceserif-italic.woff2 and inter.woff2,
+and <icons_dir> holds the 112 px app icons as PNG (cockpit-for-claude.png, macinside.png, gym-matinale.png).
 """
+import base64
 import sys
 from pathlib import Path
 
@@ -16,6 +18,7 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
 
 FONTS = Path(sys.argv[1])
+ICONS = Path(sys.argv[2])
 OUT = Path(__file__).resolve().parent.parent / "profile" / "assets"
 
 COLIBRI = """
@@ -54,6 +57,72 @@ def outline(font, text, size, x, y, tracking=0.0):
         glyphs[name].draw(TransformPen(pen, (scale, 0, 0, -scale, x, y)))
         x += hmtx[name][0] * scale + tracking * size
     return pen.getCommands(), x
+
+
+def width(font, text, size, tracking=0.0):
+    cmap, hmtx, scale = font.getBestCmap(), font["hmtx"], size / font["head"].unitsPerEm
+    return sum(hmtx[cmap[ord(ch)]][0] * scale + tracking * size for ch in text)
+
+
+def wrap(font, text, size, max_width):
+    lines, line = [], ""
+    for word in text.split(" "):
+        trial = f"{line} {word}".strip()
+        if line and width(font, trial, size) > max_width:
+            lines.append(line)
+            line = word
+        else:
+            line = trial
+    return lines + [line]
+
+
+# Apps, with the short descriptions used on www.smartcolibri.fr. `shape` follows the site's icon rules:
+# the macOS icons carry Apple's transparent margin (scaled 1.22), the iOS icon is a full square (13/56 radius).
+APPS = [
+    dict(slug="cockpit-for-claude", name="Cockpit for Claude", plat="macOS · Gratuit", shape="mac",
+         desc="Quotas Anthropic, coût et sessions Claude Code réunis dans une app native, 100 % locale."),
+    dict(slug="macinside", name="MacInside", plat="macOS · Gratuit · Open source", shape="mac",
+         desc="CPU, mémoire, réseau, capteurs, GPU et batterie en temps réel, dans une fenêtre et la barre des menus."),
+    dict(slug="gym-matinale", name="Gym Matinale", plat="iPhone · Apple Watch · Mac · Apple TV", shape="square",
+         desc="La routine de mobilité du matin, guidée par un coach vocal."),
+]
+
+
+def app_row(app, fonts):
+    """One white slip per app. GitHub leaves a few pixels between stacked images and strips styles,
+    so the rows are separate 2px-cornered slips rather than one ruled list; sizes stay legible on phones."""
+    t = THEMES["light"]
+    serif, _, sans, name_font = fonts
+    W, X, ICON = 1280, 48, 104
+    TX = X + ICON + 36
+    desc = wrap(serif, app["desc"], 28, W - TX - 130)
+    H = 46 + 40 + 34 + len(desc) * 38 + 34
+    name, _ = outline(name_font, app["name"], 40, TX, 46 + 34)
+    plat, _ = outline(sans, app["plat"], 21, TX, 46 + 40 + 26)
+    body = "".join(
+        f'<path d="{outline(serif, line, 28, TX, 46 + 40 + 34 + 34 + i * 38)[0]}" fill="#5a6374"/>'
+        for i, line in enumerate(desc))
+    png = base64.b64encode((ICONS / f"{app['slug']}.png").read_bytes()).decode()
+    iy = (H - ICON) / 2
+    if app["shape"] == "mac":
+        s = ICON * 1.22
+        icon = f'<image href="data:image/png;base64,{png}" x="{X + (ICON - s) / 2}" y="{iy + (ICON - s) / 2}" width="{s}" height="{s}"/>'
+    else:
+        r = ICON * 13 / 56
+        icon = (f'<clipPath id="ic"><rect x="{X}" y="{iy}" width="{ICON}" height="{ICON}" rx="{r}"/></clipPath>'
+                f'<image href="data:image/png;base64,{png}" x="{X}" y="{iy}" width="{ICON}" height="{ICON}" clip-path="url(#ic)"/>')
+    ax, ay = W - 70, H / 2
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="t">
+<title id="t">{app["name"]} — {app["plat"]}</title>
+<rect width="{W}" height="{H}" rx="2" fill="{t["bg"]}"/>
+<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="2" fill="none" stroke="{t["border"]}"/>
+{icon}
+<path d="{name}" fill="{t["text"]}"/>
+<path d="{plat}" fill="#69717f"/>
+{body}
+<path d="M{ax - 12} {ay + 12} L{ax + 12} {ay - 12} M{ax - 9} {ay - 12} H{ax + 12} V{ay + 9}" fill="none" stroke="{NAVY}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+"""
 
 
 def banner(theme, fonts):
@@ -113,6 +182,8 @@ def main():
     for theme in THEMES:
         (OUT / f"banner-{theme}.svg").write_text(banner(theme, fonts))
     (OUT / "avatar.svg").write_text(avatar())
+    for app in APPS:
+        (OUT / f"app-{app['slug']}.svg").write_text(app_row(app, fonts))
     for f in sorted(OUT.iterdir()):
         print(f.name, f.stat().st_size)
 

@@ -1,9 +1,4 @@
-<a href="https://smartcolibri.github.io/">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/smartcolibri/.github/main/profile/assets/banner-dark.svg">
-    <img alt="Smart Colibri — Des apps natives, précises comme un colibri" src="https://raw.githubusercontent.com/smartcolibri/.github/main/profile/assets/banner-light.svg" width="100%">
-  </picture>
-</a>
+<a href="https://smartcolibri.github.io/"><img alt="Smart Colibri — Des apps natives, précises comme un colibri" src="https://raw.githubusercontent.com/smartcolibri/.github/main/profile/assets/banner-light.svg" width="100%"></a>
 
 <p align="center">
   <a href="https://smartcolibri.github.io/"><b>Applications</b></a> ·
@@ -16,30 +11,13 @@ La même exigence de précision qu'en conseil, appliquée à des outils du quoti
 
 ### Applications
 
-<table>
-  <tr>
-    <td width="96" align="center"><a href="https://smartcolibri.github.io/ClaudeCockpit/"><img src="https://smartcolibri.github.io/ClaudeCockpit/assets/icon-256.png" width="72" alt="Cockpit for Claude"></a></td>
-    <td>
-      <a href="https://smartcolibri.github.io/ClaudeCockpit/"><b>Cockpit for Claude</b></a> &nbsp;<sub><code>macOS</code> <code>Gratuit</code></sub><br>
-      Le cockpit de Claude Code sur Mac : quotas Anthropic et rythme de consommation, coût du jour au centime, économies RTK, sessions, skills et agents réunis dans une app native, 100&nbsp;% locale.
-    </td>
-  </tr>
-  <tr>
-    <td width="96" align="center"><a href="https://smartcolibri.github.io/MacInside/"><img src="https://smartcolibri.github.io/MacInside/icon-512.png" width="72" alt="MacInside"></a></td>
-    <td>
-      <a href="https://smartcolibri.github.io/MacInside/"><b>MacInside</b></a> &nbsp;<sub><code>macOS</code> <code>Gratuit</code> <code>Open source</code></sub><br>
-      Le tableau de bord que macOS a oublié : CPU, mémoire, stockage, réseau, capteurs SMC, GPU et batterie, en temps réel, dans une fenêtre et une barre des menus entièrement personnalisable.
-      <a href="https://github.com/smartcolibri/MacInside">Code source&nbsp;→</a>
-    </td>
-  </tr>
-  <tr>
-    <td width="96" align="center"><a href="https://smartcolibri.github.io/GymMatinale/"><img src="https://smartcolibri.github.io/GymMatinale/icon.png" width="72" alt="Gym Matinale"></a></td>
-    <td>
-      <a href="https://smartcolibri.github.io/GymMatinale/"><b>Gym Matinale</b></a> &nbsp;<sub><code>iPhone</code> <code>Apple Watch</code> <code>Mac</code> <code>Apple TV</code></sub><br>
-      La routine de mobilité du matin, guidée par un coach vocal. Quelques minutes chaque jour, sur l'appareil que vous avez sous la main.
-    </td>
-  </tr>
-</table>
+<p>
+<a href="https://smartcolibri.github.io/ClaudeCockpit/"><img alt="Cockpit for Claude — macOS, gratuit. Le cockpit de Claude Code sur Mac : quotas, coût, sessions, skills et agents, 100 % local." src="https://raw.githubusercontent.com/smartcolibri/.github/main/profile/assets/app-cockpit-for-claude.svg" width="100%"></a>
+<a href="https://smartcolibri.github.io/MacInside/"><img alt="MacInside — macOS, gratuit, open source. CPU, mémoire, stockage, réseau, capteurs, GPU et batterie en temps réel." src="https://raw.githubusercontent.com/smartcolibri/.github/main/profile/assets/app-macinside.svg" width="100%"></a>
+<a href="https://smartcolibri.github.io/GymMatinale/"><img alt="Gym Matinale — iPhone, Apple Watch, Mac, Apple TV. La routine de mobilité du matin, guidée par un coach vocal." src="https://raw.githubusercontent.com/smartcolibri/.github/main/profile/assets/app-gym-matinale.svg" width="100%"></a>
+</p>
+
+<a href="https://github.com/smartcolibri/MacInside">Code source de MacInside&nbsp;→</a>
 
 ### Peu d'apps, bien faites
 

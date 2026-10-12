@@ -11,8 +11,8 @@
   <a href="mailto:contact@smartcolibri.fr"><b>Contact</b></a>
 </p>
 
-Smart Colibri conçoit et publie ses propres applications pour l'écosystème Apple : Mac, iPhone, Apple Watch et Apple TV.
-Nous y appliquons la même exigence qu'en conseil, sur des outils du quotidien.
+Smart Colibri conçoit et publie ses propres applications natives pour l'écosystème Apple : Mac, iPhone, Apple Watch et Apple TV.
+La même exigence de précision qu'en conseil, appliquée à des outils du quotidien.
 
 ### Applications
 
@@ -51,6 +51,12 @@ Le colibri ne butine pas tout : il va droit à la fleur qui compte. Nos applicat
 
 ### Derrière les apps, un cabinet de conseil
 
-[Smart Colibri](https://www.smartcolibri.fr/) accompagne les dirigeants en management, stratégie, transformation numérique et intelligence artificielle. L'édition logicielle prolonge ce savoir-faire.
+[Smart Colibri](https://www.smartcolibri.fr/) est un cabinet de conseil indépendant. Il accompagne les dirigeants dans l'adoption de l'intelligence artificielle, avec un cadre conforme à l'EU AI Act dès le départ, sur un socle de stratégie et de management.
+
+- **Intelligence artificielle** : audit et stratégie IA, sélection et intégration, formation et acculturation, gouvernance et éthique.
+- **Conseil** : gestion et management, stratégie et développement, solutions digitales.
+- **Ouvrages** : [*Le Grand Livre de l'IA*](https://amzn.eu/d/03kQRQL8) et [*BMad Method*](https://amzn.eu/d/08qneJ2T).
+
+Agilité, précision, indépendance, impact.
 
 <sub>🇫🇷 France · <a href="https://www.smartcolibri.fr/">smartcolibri.fr</a> · <a href="https://smartcolibri.github.io/">smartcolibri.github.io</a> · <a href="mailto:contact@smartcolibri.fr">contact@smartcolibri.fr</a></sub>
